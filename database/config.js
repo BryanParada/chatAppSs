@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 
+mongoose.set('strictQuery', false)
+
 const dbConnection = async() =>{
+console.log('f1');
+    try { 
+        await mongoose.connect(process.env.DB_CNN); 
 
-    try {
-
-        console.log('init db config');
+         console.log('init db config ONLINE');
         
         
     } catch (error) {
