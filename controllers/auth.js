@@ -95,6 +95,15 @@ const loginUser = async (req, res = response) => {
 
 }
 
+const renewToken = async(req, res = response)  =>{
+
+    res.json({
+        ok: true,
+        msg: 'renew'
+    })
+
+}
 
 
-module.exports = {createUser, loginUser};
+
+module.exports = {createUser, loginUser, renewToken};
