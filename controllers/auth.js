@@ -44,11 +44,57 @@ const createUser = async (req, res = response) => {
             msg: 'Contact Admin'
         })
     }
+ 
+
+}
+
+//const login ... req, res...
+//{ok: true, msg: 'login'}
+const loginUser = async (req, res = response) => {
+    const { email, password} = req.body;
+
+    try {
+
+        const userDB = await User.findOne({ email });
+        if(!userDB){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Mail not found' //solo a modo de ejemplo, NUNCA deberiamos informar si un correo fue utilizado, sino utilizar "credenciales invalidas"
+            })
+        }
+
+        //validar password
+        const validPassword = bcrypt.compareSync( password, userDB.password);
+        if(!validPassword){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Incorrect Password'  
+            })
+        }
+
+        //Generar JWT
+        const token = await generateJWT(userDB.id);
 
 
+        res.json({
+            ok: true, 
+            user: userDB,
+            token
+        });
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msg: 'Contact Admin'
+        })
+        
+    }
 
+  
 
 }
 
 
-module.exports = {createUser};
+
+module.exports = {createUser, loginUser};
