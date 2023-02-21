@@ -1,3 +1,4 @@
+const { checkJWT } = require('../helpers/jwt');
 const {io} = require('../index');
 const Band = require('../models/band');
 const Bands = require('../models/bands');
@@ -14,6 +15,16 @@ bands.addBand(new Band( 'Daikaiju') );
 //mensajes de sockets
 io.on('connection', client => { 
     console.log('Client connected');
+
+    //console.log( client.handshake.headers['x-token']);
+    
+    const [valid, uid] = checkJWT(client.handshake.headers['x-token']);
+    //console.log(valid, uid);
+
+    if (!valid){return client.disconnect()};
+    console.log('Client authenticated');
+    
+    
  
     client.on('disconnect', () => {
         console.log('Client disconnected');   
