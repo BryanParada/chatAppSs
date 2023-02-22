@@ -9,7 +9,7 @@ const getUsers = async ( req, res = response) =>{
         .find({ _id: {$ne: req.uid}})
         .sort('-online')
         .skip( from )
-        .limit(2)
+        .limit(20)
 
     //console.log(req.uid);
 
