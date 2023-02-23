@@ -1,6 +1,6 @@
 const { checkJWT } = require('../helpers/jwt');
 const {io} = require('../index');
-const { userConnected, userDisconnect} = require('../controllers/socket');
+const { userConnected, userDisconnect, storeMessage} = require('../controllers/socket');
 
 // console.log(bands)
 
@@ -26,8 +26,10 @@ io.on('connection', (client) => {
     client.join( uid);
 
     //Escuchar del cliente el personal-msg
-    client.on('personal-msg', (payload) =>{
-      console.log(payload);
+    client.on('personal-msg', async (payload) =>{
+      //console.log(payload);
+      
+      await storeMessage(payload);
 
       io.to(payload.to).emit('personal-msg', payload);
     });

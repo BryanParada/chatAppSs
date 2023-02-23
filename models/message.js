@@ -14,7 +14,7 @@ const MessageSchema = Schema({
         ref: 'User',
         required: true
     }, 
-    message: {
+    msg: {
         type: String,
         required: true
     }
