@@ -27,7 +27,9 @@ io.on('connection', (client) => {
 
     //Escuchar del cliente el personal-msg
     client.on('personal-msg', (payload) =>{
-      console.log(payload)
+      console.log(payload);
+
+      io.to(payload.to).emit('personal-msg', payload);
     });
 
     //a quien enviar
