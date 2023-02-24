@@ -1,9 +1,6 @@
 # chatAppSs
-Socket Server made in Node Js for a Flutter chat app in real time
+Socket Server made in Node Js for a Flutter chat app in real time 
 
-# chat
-
-A Chat app made in Flutter and NODE JS. 
 Video demo: https://youtu.be/EbnYHUxDehc
 
 ![image](https://user-images.githubusercontent.com/51382458/221269760-7b350a03-81a8-4804-b482-28890b333db4.png)
